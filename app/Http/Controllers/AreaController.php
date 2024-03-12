@@ -45,6 +45,12 @@ class AreaController extends Controller
     public function edit(Request $request, $id)
     {
         $data = Area::find($id);
+
+        if(!$data)
+        {
+            return redirect()->back();
+        }
+
         return view('pages.area.edit', compact('data'));
     }
 
@@ -63,6 +69,12 @@ class AreaController extends Controller
             ]);
         } else {
             $data = Area::find($id);
+
+            if(!$data)
+            {
+                return redirect()->back();
+            }
+
             $data->name = $request->input('name');
             $data->code_area = $request->input('code_area');
             $data->save();

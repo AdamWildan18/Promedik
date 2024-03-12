@@ -26,29 +26,33 @@
                             <th scope="col">No</th>
                             <th scope="col">Code Branch</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $item)
+                        @foreach ($data as $item)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->level }}</td>
+                            <td>{{ $item->code_branch }}</td>
                             <td>
                                 <div class=" d-flex inline-block">
-                                    <a href="/user/edit/{{ $item->id }}" class=" mr-2">
-                                        <span class="badge badge-warning">Edit</span>
+                                    <a href="/branch/edit/{{ $item->id }}">
+                                        <button class="btn btn-sm btn-warning mr-1"><i class="bi bi-pencil-square"></i>
+                                        </button>
                                     </a>
-                                    <form action="/user/delete/{{ $item->id }}" method="post">
+                                    <form action="/branch/delete/{{ $item->id }}" class="branchdelete" method="POST">
                                         @method('delete')
                                         @csrf
-                                        <span class="badge badge-danger">Delete</span>
+                                        <button class="btn btn-sm btn-danger" type="submit"
+                                            onclick="return confirm('Anda Yakin?')"><i
+                                                    class="bi bi-trash2"></i>
+                                        </button>
                                     </form>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -62,4 +66,23 @@
 </footer>
 <div class="overlay action-toggle">
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('submit', '.branchdelete', function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        $.post($(this).attr('action'), formData, function (response) {
+            // Handle the server response
+            if (response.success) {
+                alert(response.message)
+                window.location=document.referrer; // Redirect to a success page if needed
+            } else {
+                alert('Gagal Data sudah ada atau ada kesalahan input'); // Show error message
+            }
+        }).fail(function () {
+            alert('Terjadi kesalahan saat memproses formulir.'); // Show a generic error message
+        });
+    });
+</script>
 @endsection

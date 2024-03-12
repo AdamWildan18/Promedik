@@ -60,12 +60,18 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->level }}</td>
                             <td>
-                                <div class="d-flex inline-block">
-                                    <button class="badge badge-warning edit-button" data-toggle="modal" data-target="#editModal" data-id="{{ $item->id }}">Edit</button>
-                                    <form action="/user/delete/{{ $item->id }}" method="post">
+                                <div class=" d-flex inline-block">
+                                    <a href="/user/edit/{{ $item->id }}">
+                                        <button class="btn btn-sm btn-warning mr-1"><i class="bi bi-pencil-square"></i>
+                                        </button>
+                                    </a>
+                                    <form action="/user/delete/{{ $item->id }}" class="deleteuser" method="POST">
                                         @method('delete')
                                         @csrf
-                                        <span class="badge badge-danger">Delete</span>
+                                        <button class="btn btn-sm btn-danger" type="submit"
+                                            onclick="return confirm('Anda Yakin?')"><i
+                                                    class="bi bi-trash2"></i>
+                                        </button>
                                     </form>
                                 </div>
                             </td>

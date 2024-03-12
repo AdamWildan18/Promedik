@@ -6,29 +6,29 @@
             <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
                 <div class="card shadow-lg">
                     <div class="card-body p-4">
-                        <h1 class="fs-4 text-center fw-bold mb-4">Create Sub Teritory</h1>
-                        <form method="POST" action="{{ route('add.sub_teritory') }}" class="creatsub" autocomplete="off">
+                        <h1 class="fs-4 text-center fw-bold mb-4">Edit Teritory</h1>
+                        <form method="POST" action="{{ route('update.sub_teritory', ['id' => $data->id]) }}" class="edit_sub_teritory" autocomplete="off">
                             @csrf
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="name">Nama Sub Teritory</label>
+                                <label class="mb-2 text-muted" for="name">Nama Teritory</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="name" type="text" placeholder="Enter Nama Sub Teritory" class="form-control"
-                                        name="name" value="" required autofocus>
+                                    <input id="name" type="text" placeholder="Enter Nama Teritory" class="form-control"
+                                        name="name" value="{{ $data->name }}" required autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
-                                        Nama Sub Teritory is invalid
+                                        Nama Teritory is invalid
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="code_sub_teritories">Code Sub Teritory</label>
+                                <label class="mb-2 text-muted" for="code_teritories">Code Teritory</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="code_sub_teritories" type="text" placeholder="Enter code_sub_teritories" class="form-control"
-                                        name="code_sub_teritories" value="" required autofocus>
+                                    <input id="code_teritories" type="text" placeholder="Enter code_teritories" class="form-control"
+                                        name="code_teritories" value="{{ $data->code_teritories }}" required autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
-                                        Code Sub Teritory is invalid
+                                        Code Teritory is invalid
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(document).on('submit', '.creatsub', function (event) {
+    $(document).on('submit', '.edit_sub_teritory', function (event) {
         event.preventDefault();
         var formData = $(this).serialize();
         $.post($(this).attr('action'), formData, function (response) {

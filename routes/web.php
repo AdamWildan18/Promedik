@@ -49,15 +49,28 @@ Route::group(['middleware' => ['auth', 'ceklevel:IT']], function()
 
     //branch
     Route::get('/branch', [BranchController::class, 'index'])->name('branch');
-    Route::get('/branch/create', [BranchController::class, 'create'])->name('branch.area');
+    Route::get('/branch/create', [BranchController::class, 'create'])->name('create.branch');
+    Route::post('/branch', [BranchController::class, 'store'])->name('add.branch');
+    Route::get('/branch/edit/{id}', [BranchController::class, 'edit'])->name('edit.branch');
+    Route::post('/branch/update/{id}', [BranchController::class, 'update'])->name('update.branch');
+    Route::delete('/branch/delete/{id}', [BranchController::class, 'destroy'])->name('destroy.branch');
+
 
     //teritory
     Route::get('/teritory', [TeritoryController::class, 'index'])->name('teritory');
     Route::get('/teritory/create', [TeritoryController::class, 'create'])->name('teritory.create');
+    Route::post('/teritory/store', [TeritoryController::class, 'store'])->name('add.teritory');
+    Route::get('/teritory/edit/{id}', [TeritoryController::class, 'edit'])->name('edit.teritory');
+    Route::post('/teritory/update/{id}', [TeritoryController::class, 'update'])->name('update.teritory');
+    Route::delete('/teritory/delete/{id}', [TeritoryController::class, 'destroy'])->name('delete.teritory');
 
     //sub_teritory
     Route::get('/sub_teritory', [SubTeritoryController::class, 'index'])->name('sub_teritory');
     Route::get('/sub_teritory/create', [SubTeritoryController::class, 'create'])->name('sub_teritory.create');
+    Route::post('/sub_teritory/store', [SubTeritoryController::class, 'store'])->name('add.sub_teritory');
+    Route::get('/sub_teritory/edit/{id}', [SubTeritoryController::class, 'edit'])->name('edit.sub_teritory');
+    Route::post('/sub_teritory/update/{id}', [SubTeritoryController::class, 'update'])->name('update.sub_teritory');
+    Route::delete('/sub_teritory/delete/{id}', [SubTeritoryController::class, 'destroy'])->name('delete.sub_teritory');
 });
 
 
