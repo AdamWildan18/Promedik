@@ -1,13 +1,18 @@
 <?php
 
+use App\Models\Outlet;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\OutletController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TeritoryController;
 use App\Http\Controllers\DarsboardController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\SubTeritoryController;
 
 /*
@@ -71,6 +76,32 @@ Route::group(['middleware' => ['auth', 'ceklevel:IT']], function()
     Route::get('/sub_teritory/edit/{id}', [SubTeritoryController::class, 'edit'])->name('edit.sub_teritory');
     Route::post('/sub_teritory/update/{id}', [SubTeritoryController::class, 'update'])->name('update.sub_teritory');
     Route::delete('/sub_teritory/delete/{id}', [SubTeritoryController::class, 'destroy'])->name('delete.sub_teritory');
+
+    //product
+    Route::get('/product', [ProductController::class, 'index'])->name('product');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('add.product');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('edit.product');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('update.product');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('delete.product');
+
+    //Customer
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customer');
+    Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/customer/store', [CustomerController::class, 'store'])->name('add.customer');
+    Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('edit.customer');
+    Route::post('/customer/update/{id}', [CustomerController::class, 'update'])->name('update.customer');
+    Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('delete.customer');
+
+    //Outlet
+    Route::get('/outlet', [OutletController::class, 'index'])->name('outlet');
+    Route::get('/outlet/create', [OutletController::class, 'create'])->name('outlet.create');
+    Route::post('/outlet/store', [OutletController::class, 'store'])->name('add.outlet');
+    Route::get('/outlet/edit/{id}', [OutletController::class, 'edit'])->name('edit.outlet');
+    Route::post('/outlet/update/{id}', [OutletController::class, 'update'])->name('update.outlet');
+    Route::delete('/outlet/delete/{id}', [OutletController::class, 'destroy'])->name('delete.outlet');
+
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 });
 
 

@@ -28,6 +28,9 @@
                     <li><a href="/branch" class="link"><span>Branch</span></a></li>
                     <li><a href="/teritory" class="link"><span>Teritory</span></a></li>
                     <li><a href="/sub_teritory" class="link"><span>Sub Teritory</span></a></li>
+                    <li><a href="{{ route('product') }}" class="link"><span>Product</span></a></li>
+                    <li><a href="{{ route('customer') }}" class="link"><span>Costumer</span></a></li>
+                    <li><a href="{{ route('outlet') }}" class="link"><span>Outlet</span></a></li>
                 </ul>
             </li>
             @endif
@@ -99,7 +102,7 @@
                 </a>
             </li>
             <li>
-                <a href="charts.html" class="link">
+                <a href="{{ route('transaksi') }}" class="link">
                     <i class="ti-bar-chart"></i>
                     <span>Transaksi</span>
                 </a>
