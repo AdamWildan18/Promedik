@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Cabang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.user.create');
+        $data = Cabang::all();
+        return view('pages.user.create', compact('data'));
     }
 
     /**
@@ -49,6 +51,7 @@ class UserController extends Controller
             $data->email = $request->input('email');
             $data->password = $request->input('password');
             $data->level = $request->input('level');
+            $data->cabang = $request->input('cabang');
             $data->save();
 
             return response()->json(['success' => true, 'message' => 'Data Berhasil Disimpan']);

@@ -2,26 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OutletExport;
+use App\Exports\OutletsExport;
+use App\Models\Cabang;
+use App\Models\Kota;
 use App\Models\Outlet;
 use App\Models\Provinsi;
-use App\Models\Kota;
-use App\Models\Cabang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+
 
 class OutletController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Outlet::with('provinsi', 'kota', 'cabang')->get();
+        $user = Auth::user();
+        $outletsQuery = Outlet::with('provinsi', 'kota', 'cabang');
+        $searchQuery = $request->input('search');
+
+        if ($user->level === "BC") {
+            $branch = Cabang::where('nama_cabang', $user->cabang)->first();
+            $outletsQuery->where('code_cabang', $branch->code_cabang);
+        }
+
+        if ($searchQuery) {
+            $outletsQuery->where(function ($query) use ($searchQuery) {
+                $query->where('nama_outlet', 'LIKE', '%' . $searchQuery . '%')
+                    ->orWhere('alamat', 'LIKE', '%' . $searchQuery . '%')
+                    ->orWhere('code_outlet', 'LIKE', '%' . $searchQuery . '%')
+                    ->orWhereHas('provinsi', function ($query) use ($searchQuery) {
+                        $query->where('nama_provinsi', 'LIKE', '%' . $searchQuery . '%');
+                    })
+                    ->orWhereHas('kota', function ($query) use ($searchQuery) {
+                        $query->where('nama_kota', 'LIKE', '%' . $searchQuery . '%');
+                    });
+            });
+        }
+
+        $data = $outletsQuery->paginate(10);
 
         return view('pages.outlet.index', compact('data'));
     }
+
+        public function export()
+    {
+        return Excel::download(new OutletExport, 'outlets.xlsx');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -31,12 +64,52 @@ class OutletController extends Controller
         return view('pages.outlet.create');
     }
 
+    public function createExel()
+    {
+        return view('pages.outlet.createExel');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+        $validator = Validator::make($request->all(), [
+            'nama_outlet' => 'required|unique:master_outlet_jrecare,nama_outlet',
+            'alamat' => 'required',
+            'code_provinsi' => 'required',
+            'code_kota' => 'required',
+            'code_cabang' => 'required',
 
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages(),
+            ]);
+        } else {
+            $provinsi = Provinsi::firstOrCreate('nama_provinsi', $request->input('nama_provinsi'));
+            $codeProvinsi = $provinsi->wasRecentlyCreated ? $provinsi->id : $provinsi->code_provinsi;
+
+            $kota = Kota::firstOrCreate('nama_kota', $request->input('nama_kota'));
+            $codeKota = $kota->wasRecentlyCreated ? $kota->id : $kota->code_kota;
+
+            $cabang = Cabang::firstOrCreate('nama_cabang', $request->input('nama_cabang'));
+            $codeCabang = $cabang->wasRecentlyCreated ? $cabang->id : $cabang->code_cabang;
+
+            $data = new Outlet();
+            $data->nama_outlet = $request->input('nama_outlet');
+            $data->alamat = $request->input('alamat');
+            $data->code_provinsi = $codeProvinsi;
+            $data->code_kota = $codeKota;
+            $data->code_cabang = $codeCabang;
+            $data->save();
+
+            return response()->json(['success' => true, 'message' => 'Data Berhasil Disimpan']);
+        }
+    }
+
+    public function storeExel(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'excel_file' => 'required|mimes:xlsx,xls',
         ]);
@@ -63,49 +136,34 @@ class OutletController extends Controller
             $alamat = $worksheet->getCell('C'.$row)->getValue();
 
             // Cari atau buat record Provinsi
-            $provinsi = Provinsi::where('nama_provinsi', $namaProvinsi)->first();
-            if (!$provinsi) {
-                $provinsi = new Provinsi();
-                $provinsi->nama_provinsi = $namaProvinsi;
-                // Generate kode unik untuk provinsi
-                $provinsi->save();
-            }
-            $codeProvinsi = $provinsi->code_provisi;
-
+            $provinsi = Provinsi::firstOrCreate(['nama_provinsi' => $namaProvinsi]);
+            // Dapatkan kode Provinsi, jika record baru dibuat, gunakan null
+            $codeProvinsi = $provinsi->wasRecentlyCreated ? $provinsi->id : $provinsi->code_provinsi;
             // Cari atau buat record Kota
-            $kota = Kota::where('nama_kota', $namaKota)->first();
-            if (!$kota) {
-                $kota = new Kota();
-                $kota->nama_kota = $namaKota;
-                // Generate kode unik untuk kota
-                $kota->save();
-            }
-            $codeKota = $kota->code_kota;
+            $kota = Kota::firstOrCreate(['nama_kota' => $namaKota]);
+            // Dapatkan kode Kota, jika record baru dibuat, gunakan null
+            $codeKota = $kota->wasRecentlyCreated ? $kota->id : $kota->code_kota;
 
             // Cari atau buat record Cabang
-            $cabang = Cabang::where('nama_cabang', $namaCabang)->first();
-            if (!$cabang) {
-                $cabang = new Cabang();
-                $cabang->nama_cabang = $namaCabang;
-                // Generate kode unik untuk cabang
-                $cabang->save();
-            }
-            $codeCabang = $cabang->code_cabang;
+            $cabang = Cabang::firstOrCreate(['nama_cabang' => $namaCabang]);
+            // Dapatkan kode Cabang, jika record baru dibuat, gunakan null
+            $codeCabang = $cabang->wasRecentlyCreated ? $cabang->id : $cabang->code_cabang;
 
             // Simpan data Outlet
             $outlet = new Outlet();
             $outlet->nama_outlet = $namaOutlet;
             $outlet->code_provinsi = $codeProvinsi;
-            $outlet->code_kota = $codeKota; // Pastikan code_kota diatur
+            $outlet->code_kota = $codeKota;
             $outlet->code_cabang = $codeCabang;
             $outlet->alamat = $alamat;
             $outlet->save();
-
         }
 
         // Berikan respons jika selesai memproses semua baris
         return response()->json(['success' => true, 'message' => 'Data from Excel successfully saved']);
     }
+
+
 
     public function edit(Request $request, $id)
     {

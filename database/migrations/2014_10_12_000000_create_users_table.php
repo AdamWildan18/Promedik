@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('cabang')->nullable();
             $table->enum('level', ['AT', 'IT', 'AKU', 'AC', 'AM', 'BC', 'BDM', 'DirOp', 'Dirut', 'INF', 'IC', 'KEU', 'MK', 'PRO', 'PM', 'SMR', 'SPV', 'SM'])->nullable();
             $table->timestamps();
         });

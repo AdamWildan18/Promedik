@@ -274,7 +274,7 @@
                                         Mas Bambang
                                     </div>
                                     <div class="message-text">
-                                        Glad to see you ;)
+                                        Glad to see you ;
                                     </div>
                                     <div class="message-avatar">
                                         <img src="../assets/images/avatar1.png" alt="">

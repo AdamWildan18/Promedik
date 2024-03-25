@@ -7,34 +7,32 @@
     </div>
     <div class="sidebar-content">
         <ul>
-            <li class="active">
+            <li class="{{ '/' == request()->path() ? 'active' : '' }}">
                 <a href="/" class="link">
                     <i class="ti-home"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            @if (Auth::user()->level == 'IT')
             <li class="menu-category">
                 <span class="text-uppercase">Management User</span>
             </li>
-            <li>
+            <li class="{{ in_array(request()->path(), ['user', 'area', 'branch', 'teritory', 'sub_teritory', 'product', 'customer', 'outlet', 'outlet/create']) ? 'active' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>
                     <span>Management</span>
                 </a>
                 <ul class="sub-menu ">
-                    <li><a href="/user" class="link"><span>User</span></a></li>
-                    <li><a href="/area" class="link"><span>Area</span></a></li>
-                    <li><a href="/branch" class="link"><span>Branch</span></a></li>
-                    <li><a href="/teritory" class="link"><span>Teritory</span></a></li>
-                    <li><a href="/sub_teritory" class="link"><span>Sub Teritory</span></a></li>
-                    <li><a href="{{ route('product') }}" class="link"><span>Product</span></a></li>
-                    <li><a href="{{ route('customer') }}" class="link"><span>Costumer</span></a></li>
-                    <li><a href="{{ route('outlet') }}" class="link"><span>Outlet</span></a></li>
+                    <li class="{{ 'user' == request()->path() ? 'active' : '' }}"><a href="/user" class="link"><span>User</span></a></li>
+                    <li class="{{ 'area' == request()->path() ? 'active' : '' }}"><a href="/area" class="link"><span>Area</span></a></li>
+                    <li class="{{ 'branch' == request()->path() ? 'active' : '' }}"><a href="/branch" class="link"><span>Branch</span></a></li>
+                    <li class="{{ 'teritory' == request()->path() ? 'active' : '' }}"><a href="/teritory" class="link"><span>Teritory</span></a></li>
+                    <li class="{{ 'sub_teritory' == request()->path() ? 'active' : '' }}"><a href="/sub_teritory" class="link"><span>Sub Teritory</span></a></li>
+                    <li class="{{ 'product' == request()->path() ? 'active' : '' }}"><a href="{{ route('product') }}" class="link"><span>Product</span></a></li>
+                    <li class="{{ 'customer' == request()->path() ? 'active' : '' }}"><a href="{{ route('customer') }}" class="link"><span>Costumer</span></a></li>
+                    <li class="{{ in_array(request()->path(), ['outlet', 'outlet/create']) ? 'active' : '' }}"><a href="{{ route('outlet') }}" class="link"><span>Outlet</span></a></li>
                 </ul>
             </li>
-            @endif
-            <li>
+            <li class="{{ '' == request()->path() ? 'active' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-book"></i>
                     <span>Sales</span>
@@ -62,11 +60,11 @@
                             <span>Sales Upload !</span></a>
                     </li>
                 </ul>
-            </li>
+            </li class="{{ '' == request()->path() ? 'active' : '' }}">
             <li class="menu-category">
                 <span class="text-uppercase">Target</span>
             </li>
-            <li>
+            <li class="{{ '' == request()->path() ? 'active' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-notepad"></i>
                     <span>Target</span>
@@ -81,7 +79,7 @@
                     <li><a href="error-500.html" target="_blank" class="link"><span>Sales vs Target MR by Product</span></a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ '' == request()->path() ? 'active' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-layers-alt"></i>
                     <span>Mapping</span>
@@ -95,13 +93,13 @@
                     <li><a href="pages-blank.html" class="link"><span>Data Outlate</span></a></li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ '' == request()->path() ? 'active' : '' }}">
                 <a href="charts.html" class="link">
                     <i class="ti-bar-chart"></i>
                     <span>Product</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ '' == request()->path() ? 'active' : '' }}">
                 <a href="{{ route('transaksi') }}" class="link">
                     <i class="ti-bar-chart"></i>
                     <span>Transaksi</span>

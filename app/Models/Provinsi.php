@@ -9,7 +9,7 @@ class Provinsi extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['code_provisi'];
+    protected $guarded = ['code_provinsi'];
 
     public $timestamps = true;
 
@@ -20,6 +20,6 @@ class Provinsi extends Model
      */
     public function outlet()
     {
-        return $this->hasMany(Outlet::class, 'code_provisi', 'code_provinsi');
+        return $this->hasMany(Outlet::class, 'code_provinsi', 'code_provinsi');
     }
 }

@@ -20,7 +20,7 @@ class Outlet extends Model
      */
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'code_provinsi', 'code_provisi');
+        return $this->belongsTo(Provinsi::class, 'code_provinsi', 'code_provinsi');
     }
 
     /**

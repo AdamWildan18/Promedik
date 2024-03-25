@@ -49,6 +49,7 @@
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">Level</th>
+                            <th scope="col">Cabang</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -59,6 +60,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->level }}</td>
+                            <td>{{ $item->cabang }}</td>
                             <td>
                                 <div class=" d-flex inline-block">
                                     <a href="/user/edit/{{ $item->id }}">

@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="input-group input-group-join mb-3">
-                                    <select name="level" id="level" class="form-select rounded-end">
+                                    <select name="level" id="level" class="form-select rounded-end" onchange="levelselect()">
                                         <option value="">Choice Level</option>
                                         <option value="AT">Admin Tiket</option>
                                         <option value="IT">Admin IT</option>
@@ -78,6 +78,21 @@
                                     <div class="invalid-feedback">
                                         level required
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 cabang" style="display: none">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="cabang">Cabang</label>
+                                </div>
+
+                                <div class="input-group input-group-join mb-3">
+                                    <select name="cabang" id="cabang" class="form-select rounded-end">
+                                        <option value="">Choice Cabang</option>
+                                        @foreach ($data as $cabang)
+                                        <option value="{{$cabang->nama_cabang}}">{{$cabang->nama_cabang}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -118,5 +133,16 @@
             alert('Terjadi kesalahan saat memproses formulir.'); // Show a generic error message
         });
     });
+
+    function levelselect() {
+        var level = document.getElementById('level').value;
+        var cabangDiv = document.querySelector('.cabang');
+
+        if (level == "BC") {
+            cabangDiv.style.display = 'block';
+        } else {
+            cabangDiv.style.display = 'none';
+        }
+    }
 </script>
 @endsection

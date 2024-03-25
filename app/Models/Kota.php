@@ -20,6 +20,6 @@ class Kota extends Model
      */
     public function outlet()
     {
-        return $this->belongsTo(Outlet::class, 'code_kota', 'nama_kota');
+        return $this->hasMany(Outlet::class, 'code_kota', 'code_kota');
     }
 }

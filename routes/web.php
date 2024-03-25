@@ -34,7 +34,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', [DarsboardController::class, 'index'])->middleware('auth');
 
-Route::group(['middleware' => ['auth', 'ceklevel:IT']], function()
+Route::group(['middleware' => ['auth']], function()
 {
     //user
     Route::get('/user', [UserController::class, 'index']);
@@ -96,10 +96,14 @@ Route::group(['middleware' => ['auth', 'ceklevel:IT']], function()
     //Outlet
     Route::get('/outlet', [OutletController::class, 'index'])->name('outlet');
     Route::get('/outlet/create', [OutletController::class, 'create'])->name('outlet.create');
+    Route::get('/outlet/createExel', [OutletController::class, 'createExel'])->name('outletExel.create');
     Route::post('/outlet/store', [OutletController::class, 'store'])->name('add.outlet');
+    Route::post('/outlet/storeExel', [OutletController::class, 'store'])->name('add.outletExel');
     Route::get('/outlet/edit/{id}', [OutletController::class, 'edit'])->name('edit.outlet');
     Route::post('/outlet/update/{id}', [OutletController::class, 'update'])->name('update.outlet');
     Route::delete('/outlet/delete/{id}', [OutletController::class, 'destroy'])->name('delete.outlet');
+    Route::get('/export-outlets', [OutletController::class, 'export'])->name('export.outlets');
+
 
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 });
