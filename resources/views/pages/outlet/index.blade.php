@@ -24,17 +24,14 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Name</th>
                             <th scope="col">Code Outlet</th>
-                            <th scope="col">Jenis Outlet</th>
-                            <th scope="col">Type Outlet</th>
-                            <th scope="col">Nama Direktur</th>
-                            <th scope="col">Nama Ok</th>
-                            <th scope="col">PPK</th>
-                            <th scope="col">IF Farmasi</th>
-                            <th scope="col">Listing Product</th>
-                            <th scope="col">Proges Outlet</th>
-                            <th scope="col">Keterangan</th>
+                            <th scope="col">Nama Outlet</th>
+                            {{-- <th scope="col">Code Provisi</th> --}}
+                            <th scope="col">Nama Provisi</th>
+                            {{-- <th scope="col">Code Kota</th> --}}
+                            <th scope="col">Nama Kota</th>
+                            {{-- <th scope="col">Code Cabang</th> --}}
+                            <th scope="col">Nama Cabang</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -42,24 +39,37 @@
                         @foreach ($data as $item)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $item->name }}</td>
                             <td>{{ $item->code_outlet }}</td>
-                            <td>{{ $item->jenis_outlet }}</td>
-                            <td>{{ $item->type_outlet }}</td>
-                            <td>{{ $item->nama_direktur }}</td>
-                            <td>{{ $item->nama_ok }}</td>
-                            <td>{{ $item->ppk }}</td>
-                            <td>{{ $item->if_farmasi }}</td>
-                            <td>{{ $item->listing_product }}</td>
-                            <td>{{ $item->proges_outlet }}</td>
-                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->nama_outlet }}</td>
+                            {{-- <td>{{ $item->code_provinsi }}</td> --}}
+                            <td>
+                                @if($item->provinsi)
+                                    {{ $item->provinsi->nama_provinsi }}
+                                @else
+                                    Nama Provinsi Tidak Ditemukan
+                                @endif
+                            </td>
+                            <td>
+                                @if($item->kota)
+                                    {{ $item->kota->nama_kota }}
+                                @else
+                                    Nama Kota Tidak Ditemukan
+                                @endif
+                            </td>
+                            <td>
+                                @if($item->cabang)
+                                    {{ $item->cabang->nama_cabang }}
+                                @else
+                                    Nama Cabang Tidak Ditemukan
+                                @endif
+                            </td>
                             <td>
                                 <div class=" d-flex inline-block">
-                                    <a href="{{ route('edit.outlet', ['id' => $item->id]) }}">
+                                    <a href="{{ route('edit.outlet', ['id' => $item->code_outlet]) }}">
                                         <button class="btn btn-sm btn-warning mr-1"><i class="bi bi-pencil-square"></i>
                                         </button>
                                     </a>
-                                    <form action="{{ route('delete.outlet', ['id' => $item->id]) }}" class="branchdelete" method="POST">
+                                    <form action="{{ route('delete.outlet', ['id' => $item->code_outlet]) }}" class="branchdelete" method="POST">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-sm btn-danger" type="submit"

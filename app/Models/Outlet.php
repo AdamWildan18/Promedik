@@ -9,7 +9,33 @@ class Outlet extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $table = 'master_outlet_jrecare';
+
+    protected $guarded = ['code_outlet'];
 
     public $timestamps = true;
+
+    /**
+     * Get the provinsi for the outlet.
+     */
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'code_provinsi', 'code_provisi');
+    }
+
+    /**
+     * Get the kota for the outlet.
+     */
+    public function kota()
+    {
+        return $this->belongsTo(Kota::class, 'code_kota', 'code_kota');
+    }
+
+    /**
+     * Get the cabang for the outlet.
+     */
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class, 'code_cabang', 'code_cabang');
+    }
 }

@@ -7,28 +7,21 @@
                 <div class="card shadow-lg">
                     <div class="card-body p-4">
                         <h1 class="fs-4 text-center fw-bold mb-4">Create Outlet</h1>
-                        <form method="POST" action="{{ route('add.outlet') }}" class="cretaebranch" autocomplete="off">
+                        <form action="{{ route('add.outlet') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="excel_file">
+                            <button type="submit">Upload</button>
+                        </form>
+                        {{-- <form method="POST" action="{{ route('add.outlet') }}" class="cretaebranch" autocomplete="off">
                             @csrf
                             <div class="mb-3">
                                 <label class="mb-2 text-muted" for="name">Nama Outlet</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="name" type="text" placeholder="Enter Nama Outlet" class="form-control"
-                                        name="name" value="" required autofocus>
+                                    <input id="nama_outlet" type="text" placeholder="Enter Nama Outlet" class="form-control"
+                                        name="nama_outlet" value="" required autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
                                         Nama Outlet is invalid
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="mb-2 text-muted" for="code_outlet">Code Outlet</label>
-                                <div class="input-group input-group-join mb-3">
-                                    <input id="code_outlet" type="text" placeholder="Enter code_outlet" class="form-control"
-                                        name="code_outlet" value="" required autofocus>
-                                        <span class="input-group-text rounded-end"></span>
-                                    <div class="invalid-feedback">
-                                        Code Outlet is invalid
                                     </div>
                                 </div>
                             </div>
@@ -63,22 +56,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="nama_direktur">Nama Direktur</label>
+                                <label class="mb-2 text-muted" for="nama_direktur">Nama Provinsi</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="nama_direktur" type="text" placeholder="Enter Nama Direktur" class="form-control"
-                                        name="nama_direktur" value="" autofocus>
+                                    <input id="namaProvinsi" type="text" placeholder="Enter Nama Provisi" class="form-control"
+                                        name="nama_provinsi" value="" autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
-                                        Nama Direktur is invalid
+                                        Nama Provinsi is invalid
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="nama_ok">Nama OK</label>
+                                <label class="mb-2 text-muted" for="nama_kota">Nama Kota</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="nama_ok" type="text" placeholder="Enter Nama OK" class="form-control"
-                                        name="nama_ok" value="" autofocus>
+                                    <input id="nama_kota" type="text" placeholder="Enter Nama Kota" class="form-control"
+                                        name="nama_kota" value="" autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
                                         Nama OK is invalid
@@ -87,10 +80,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="mb-2 text-muted" for="ppk">PPK</label>
+                                <label class="mb-2 text-muted" for="nama_cabang">Nama cabang</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input id="ppk" type="text" placeholder="Enter PPK" class="form-control"
-                                        name="ppk" value="" autofocus>
+                                    <input id="nama_cabang" type="text" placeholder="Enter Nama Cabang" class="form-control"
+                                        name="nama_cabang" value="" autofocus>
                                         <span class="input-group-text rounded-end"></span>
                                     <div class="invalid-feedback">
                                         PPK is invalid
@@ -152,7 +145,7 @@
                                     Save
                                 </button>
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>
@@ -168,7 +161,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+{{-- <script>
     $(document).on('submit', '.cretaebranch', function (event) {
         event.preventDefault();
         var formData = $(this).serialize();
@@ -184,5 +177,5 @@
             alert('Terjadi kesalahan saat memproses formulir.'); // Show a generic error message
         });
     });
-</script>
+</script> --}}
 @endsection
