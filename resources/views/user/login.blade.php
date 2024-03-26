@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication Login &mdash; Arfa</title>
+    <title>Login &mdash; SalesJrcare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
         crossorigin="anonymous" />
@@ -25,15 +25,21 @@
     <div class="row justify-content-sm-center h-100 align-items-center">
         <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
             <div class="card shadow-lg">
+
                 <div class="card-body p-4">
-                    <h1 class="fs-4 text-center fw-bold mb-4">Login</h1>
-                    <h1 class="fs-6 mb-3">Please enter your email and password to log in.</h1>
+                    <!-- Logo Section -->
+                    <div class="card-header text-center d-flex align-items-center justify-content-center">
+                        <img src="{{ asset('assets/images/bg3.png') }}" alt="Your Logo" class="img-fluid" style="max-width: 100%; max-height: 100px;">
+                    </div>
+                    <!-- End Logo Section -->
+                    <h1 class="fs-4 text-center fw-bold mb-4">LOG IN</h1>
+                    <h1 class="fs-6 mb-3">Masukan Email dan Password untuk Log In.</h1>
                     <form method="post" action="{{ route('postlogin') }}">
                         @csrf
                         <div class="mb-3">
                             <label class="mb-2 text-muted" for="email">E-Mail Address</label>
                             <div class="input-group input-group-join mb-3">
-                                <input id="email" type="email" placeholder="Enter Email" class="form-control"
+                                <input id="email" type="email" placeholder="email@promedik.co.id" class="form-control"
                                     name="email" value="" required autofocus>
                                     <span class="input-group-text rounded-end">&nbsp<i class="fa fa-envelope"></i>&nbsp</span>
                                 <div class="invalid-feedback">
@@ -64,7 +70,7 @@
                 </div>
             </div>
             <div class="text-center mt-5 text-muted">
-                Copyright &copy; 2022 &mdash; Mulai Dari Null
+                Copyright &copy; 2024 &mdash; PT. Promosindo Medika
             </div>
         </div>
     </div>
