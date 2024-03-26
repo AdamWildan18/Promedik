@@ -1,6 +1,7 @@
 <nav class="main-sidebar ps-menu">
     <div class="sidebar-header">
-        <div class="text">AR</div>
+        <img src="{{ asset('assets/images/promedik.png') }}" class="sidebar-logo">
+
         <div class="close-sidebar action-toggle">
             <i class="ti-close"></i>
         </div>
@@ -109,15 +110,4 @@
     </div>
 </nav>
 
-<script>
-    // Mendapatkan path URL saat ini
-    var currentPath = window.location.pathname;
 
-    // Mencari tautan yang sesuai dengan path saat ini dan menambahkan kelas "active"
-    $('.sidebar-content a').each(function() {
-        var linkPath = $(this).attr('href');
-        if (linkPath === currentPath) {
-            $(this).closest('li').addClass('active');
-        }
-    });
-</script>

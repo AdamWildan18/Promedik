@@ -15,6 +15,8 @@ class Outlet extends Model
 
     public $timestamps = true;
 
+    protected $primaryKey = 'code_outlet';
+
     /**
      * Get the provinsi for the outlet.
      */

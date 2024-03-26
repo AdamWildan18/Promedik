@@ -13,6 +13,7 @@ class Provinsi extends Model
 
     public $timestamps = true;
 
+    protected $primaryKey = 'code_provinsi';
     /**
      * Get the outlet that owns the Provinsi
      *

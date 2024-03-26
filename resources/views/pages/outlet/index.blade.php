@@ -15,13 +15,16 @@
                 </div>
             </form>
             <div class="btn">
-                <a href="{{ route('outletExel.create') }}" class="btn btn-sm btn-primary">Import Excel</a>
+                <a href="{{ route('outletExel.create') }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Import Excel"><i class="bi bi-filetype-exe"></i></a>
             </div>
             <div class="btn">
-                <a href="{{ route('outlet.create') }}" class="btn btn-sm btn-primary">Create Outlet</a>
+                <a href="{{ route('outlet.create') }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Create">
+                    <i class="bi bi-plus-circle"></i>
+                </a>
             </div>
+
             <div class="btn">
-                <a href="{{ route('export.outlets') }}" class="btn btn-sm btn-primary">Export Outlet</a>
+                <a href="{{ route('export.outlets') }}" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="right" title="Export"><i class="bi bi-download"></i></a>
             </div>
         </div>
         <div class="table-responsive">
@@ -70,14 +73,14 @@
                         <td>
                             <div class=" d-flex inline-block">
                                 <a href="{{ route('edit.outlet', ['id' => $item->code_outlet]) }}">
-                                    <button class="btn btn-sm btn-warning mr-1"><i class="bi bi-pencil-square"></i>
+                                    <button class="btn btn-sm btn-warning mr-1" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit"><i class="bi bi-pencil-square"></i>
                                     </button>
                                 </a>
                                 <form action="{{ route('delete.outlet', ['id' => $item->code_outlet]) }}" class="branchdelete" method="POST">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-sm btn-danger" type="submit"
-                                        onclick="return confirm('Anda Yakin?')"><i
+                                        onclick="return confirm('Anda Yakin?')" data-bs-toggle="tooltip" data-bs-placement="right" title="Delete"><i
                                                 class="bi bi-trash2"></i>
                                     </button>
                                 </form>

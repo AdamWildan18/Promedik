@@ -41,6 +41,9 @@ class OutletController extends Controller
                     })
                     ->orWhereHas('kota', function ($query) use ($searchQuery) {
                         $query->where('nama_kota', 'LIKE', '%' . $searchQuery . '%');
+                    })
+                    ->orWhereHas('cabang', function ($query) use ($searchQuery) {
+                        $query->where('nama_cabang', 'LIKE', '%' . $searchQuery . '%');
                     });
             });
         }
@@ -51,9 +54,10 @@ class OutletController extends Controller
     }
 
         public function export()
-    {
-        return Excel::download(new OutletExport, 'outlets.xlsx');
-    }
+        {
+
+            return Excel::download(new OutletExport, 'outlets.xlsx');
+        }
 
 
     /**

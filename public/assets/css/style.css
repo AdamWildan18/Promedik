@@ -145,6 +145,16 @@ body {
   margin: 20px 20px;
 }
 
+.sidebar-logo {
+    width: 25px; /* Atur ukuran gambar sesuai kebutuhan */
+    height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi aslinya */
+    transition: width 0.3s; /* Tambahkan efek transisi untuk perubahan ukuran */
+}
+
+.sidebar-open .sidebar-logo {
+    width: 50px; /* Atur ukuran gambar yang lebih besar saat sidebar dibuka */
+}
+
 .menu-category {
   display: block;
   margin: 15px 25px;

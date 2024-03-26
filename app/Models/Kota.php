@@ -13,6 +13,7 @@ class Kota extends Model
 
     public $timestamps = true;
 
+    protected $primaryKey = 'code_kota';
     /**
      * Get the outlet that owns the Provinsi
      *

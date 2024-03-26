@@ -13,6 +13,7 @@ class Cabang extends Model
 
     public $timestamps = true;
 
+    protected $primaryKey = 'code_cabang';
     /**
      * Get the outlet that owns the Provinsi
      *
