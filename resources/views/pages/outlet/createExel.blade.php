@@ -7,7 +7,7 @@
                 <div class="card shadow-lg">
                     <div class="card-body p-4">
                         <h1 class="fs-4 text-center fw-bold mb-4">Create Outlet</h1>
-                        <form action="{{ route('add.outletExel') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('add.outletExel') }}" method="POST" class="cretaebranch" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
                                 <input type="file" class="form-control form-control-file" name="excel_file">

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('code_provinsi');
             $table->bigInteger('code_kota');
             $table->bigInteger('code_cabang');
-            $table->string('nama_outlet', 150);
+            $table->string('nama_outlet', 150)->unique();
             $table->string('alamat', 150);
             $table->timestamps();
         });

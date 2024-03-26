@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('/outlet/create', [OutletController::class, 'create'])->name('outlet.create');
     Route::get('/outlet/createExel', [OutletController::class, 'createExel'])->name('outletExel.create');
     Route::post('/outlet/store', [OutletController::class, 'store'])->name('add.outlet');
-    Route::post('/outlet/storeExel', [OutletController::class, 'store'])->name('add.outletExel');
+    Route::post('/outlet/storeExel', [OutletController::class, 'storeExel'])->name('add.outletExel');
     Route::get('/outlet/edit/{id}', [OutletController::class, 'edit'])->name('edit.outlet');
     Route::post('/outlet/update/{id}', [OutletController::class, 'update'])->name('update.outlet');
     Route::delete('/outlet/delete/{id}', [OutletController::class, 'destroy'])->name('delete.outlet');

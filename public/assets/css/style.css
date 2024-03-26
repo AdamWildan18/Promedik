@@ -146,7 +146,7 @@ body {
 }
 
 .sidebar-logo {
-    width: 25px; /* Atur ukuran gambar sesuai kebutuhan */
+    width: 50px; /* Atur ukuran gambar sesuai kebutuhan */
     height: auto; /* Biarkan tinggi gambar menyesuaikan proporsi aslinya */
     transition: width 0.3s; /* Tambahkan efek transisi untuk perubahan ukuran */
 }

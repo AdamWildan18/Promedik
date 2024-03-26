@@ -140,27 +140,35 @@ class OutletController extends Controller
             $alamat = $worksheet->getCell('C'.$row)->getValue();
 
             // Cari atau buat record Provinsi
-            $provinsi = Provinsi::firstOrCreate(['nama_provinsi' => $namaProvinsi]);
-            // Dapatkan kode Provinsi, jika record baru dibuat, gunakan null
-            $codeProvinsi = $provinsi->wasRecentlyCreated ? $provinsi->id : $provinsi->code_provinsi;
-            // Cari atau buat record Kota
-            $kota = Kota::firstOrCreate(['nama_kota' => $namaKota]);
-            // Dapatkan kode Kota, jika record baru dibuat, gunakan null
-            $codeKota = $kota->wasRecentlyCreated ? $kota->id : $kota->code_kota;
 
-            // Cari atau buat record Cabang
-            $cabang = Cabang::firstOrCreate(['nama_cabang' => $namaCabang]);
-            // Dapatkan kode Cabang, jika record baru dibuat, gunakan null
-            $codeCabang = $cabang->wasRecentlyCreated ? $cabang->id : $cabang->code_cabang;
+            $provinsi = Provinsi::where('nama_provinsi', $namaProvinsi)->first();
+            if (!$provinsi) {
+                $provinsi = Provinsi::create(['nama_provinsi' => $namaProvinsi]);
+            }
+            $codeProvinsi = $provinsi->code_provinsi;
 
-            // Simpan data Outlet
-            $outlet = new Outlet();
-            $outlet->nama_outlet = $namaOutlet;
-            $outlet->code_provinsi = $codeProvinsi;
-            $outlet->code_kota = $codeKota;
-            $outlet->code_cabang = $codeCabang;
-            $outlet->alamat = $alamat;
-            $outlet->save();
+            $kota = Kota::where('nama_kota', $namaKota)->first();
+            if (!$kota) {
+                $kota = Kota::create(['nama_kota' => $namaKota]);
+            }
+            $codeKota = $kota->code_kota;
+
+            $cabang = Cabang::where('nama_cabang', $namaCabang)->first();
+            if (!$cabang) {
+                $cabang = Cabang::create(['nama_cabang' => $namaCabang]);
+            }
+            $codeCabang = $cabang->code_cabang;
+
+            $data = Outlet::where(['nama_outlet' => $namaOutlet])->first();
+            if (!$data) {
+                $outlet = new Outlet();
+                $outlet->nama_outlet = $namaOutlet;
+                $outlet->code_provinsi = $codeProvinsi;
+                $outlet->code_kota = $codeKota;
+                $outlet->code_cabang = $codeCabang;
+                $outlet->alamat = $alamat;
+                $outlet->save();
+            }
         }
 
         // Berikan respons jika selesai memproses semua baris
